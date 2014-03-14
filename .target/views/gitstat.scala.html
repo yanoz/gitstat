@@ -1,0 +1,41 @@
+
+@(form: Form[Gitstat.Search], found: String)
+
+@main(title = "Home") {
+<div class="row">
+    <h1>GITSTAT</h1>
+      <div class="col-xs-4">
+        @helper.form(action = routes.Gitstat.search, 'role -> "form", 'class -> "form-horizontal") {
+        @if(form.hasGlobalErrors) {
+            <div class="alert alert-danger">
+                    @form.globalError.message
+            </div>
+        }
+        <div class="form-group">
+                <label for="from" class="mandatory">from date</label>
+                <input type="text" class="form-control" name="fromDate" id="from" placeholder="from date (YYYY-MM-DD)" required  placeholder=".col-xs-4">
+            </div>
+        <div class="form-group">
+                <label for="to">to date</label>
+                <input type="text" class="form-control" name="toDate" id="to" placeholder="to date (YYYY-MM-DD)" required  placeholder=".col-xs-4">
+        </div>
+        <div class="form-group">
+            <label for="from" class="mandatory">data to fetch</label>
+            <select class="form-control" name="data" id="dataType">
+                <option value="issues">Issues</option>
+                <option value="commits">Commits</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">View</button>
+        </div>
+        }                    
+    </div>
+
+    <div class="col-xs-4">
+        @if(found != null) {
+            <h3>@found</h3>
+        }
+    </div>
+</div>
+}
